@@ -7,30 +7,46 @@
     <!--BOOTSTRAP CSS & JS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
     <title>Trabajo Grupal 3.5</title>
 </head>
 <body>
     
-    <form id="formulario">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre"><br>
+    <div class="container mx-auto">
+        <h2>Cálculo de sueldo según cargas familiares.</h2>
+      <form id="formulario">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" name="nombre">
+        </div>
       
-        <label for="apellidos">Apellidos:</label>
-        <input type="text" id="apellidos" name="apellidos"><br>
+        <div class="mb-3">
+          <label for="apellidos" class="form-label">Apellidos:</label>
+          <input type="text" class="form-control" id="apellidos" name="apellidos">
+        </div>
       
-        <label for="sueldoActual">Sueldo actual:</label>
-        <input type="number" id="sueldoActual" name="sueldoActual"><br>
+        <div class="mb-3">
+          <label for="sueldoActual" class="form-label">Sueldo actual:</label>
+          <input type="number" class="form-control" id="sueldoActual" name="sueldoActual">
+        </div>
       
-        <label for="sueldoSemestreAnterior">Sueldo semestre anterior:</label>
-        <input type="number" id="sueldoSemestreAnterior" name="sueldoSemestreAnterior"><br>
+        <div class="mb-3">
+          <label for="sueldoSemestreAnterior" class="form-label">Sueldo semestre anterior:</label>
+          <input type="number" class="form-control" id="sueldoSemestreAnterior" name="sueldoSemestreAnterior">
+        </div>
       
-        <label for="tieneCargasFamiliares">¿Tiene cargas familiares?</label>
-        <input type="checkbox" id="tieneCargasFamiliares" name="tieneCargasFamiliares"><br>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="tieneCargasFamiliares" name="tieneCargasFamiliares">
+          <label for="tieneCargasFamiliares" class="form-check-label">¿Tiene cargas familiares?</label>
+        </div>
       
-        <label for="cantidadCargasFamiliares">Cantidad de cargas familiares:</label>
-        <input type="number" id="cantidadCargasFamiliares" name="cantidadCargasFamiliares" disabled><br>
+        <div class="mb-3">
+          <label for="cantidadCargasFamiliares" class="form-label">Cantidad de cargas familiares:</label>
+          <input type="number" class="form-control" id="cantidadCargasFamiliares" name="cantidadCargasFamiliares" disabled>
+        </div>
       
-        <input type="submit" value="Calcular sueldo">
+        <button type="submit" class="btn btn-primary">Calcular sueldo</button>
+        </div>
       </form>
 
       <p id="resultado"></p>
