@@ -1,24 +1,41 @@
 
-let usuario = {
+let nombreEntrada = prompt("Ingrese su nombre: ");
+let apellidosEntrada = prompt("Ingrese sus apellidos: ");
 
-    nombreUsuarioMayus(nombre, apellidos) {                              // #1
-        let nombreMayus = nombre.toUpperCase();
-        let apellidoMayus = apellidos.toUpperCase();
+let usuario = {
+    nombreUsuarioMayus(nombre, apellidos) {        
+        let nombreUsuario = nombre.toUpperCase();
+        let apellidosUsuario = apellidos.toUpperCase();
+
+        let nombreMayus = nombreUsuario.toUpperCase();
+        let apellidosMayus = apellidosUsuario.toUpperCase();
     
-        return console.log(nombreMayus + " " + apellidoMayus);
+        return console.log(nombreMayus + " " + apellidosMayus);
     },
 
-    sueldo(nombre, apellidos, sueldoActual, sueldoPromedio) {
-    console.log(nombre + " " + apellidos);
-    console.log("Su sueldo actual es: " + sueldoActual + " y su sueldo promedio del semestre pasado es: " + sueldoPromedio);
+    sueldo(){
 
     }
 }
 
-usuario.nombreUsuarioMayus("Pepito", "Perez Flores");
-usuario.sueldo("Pepito", "Perez Flores", "850000", "700000");
+usuario.nombreUsuarioMayus(nombreEntrada, apellidosEntrada);
+
+/*
+
+let usuario = {
+
+    sueldo(nombre, apellidos, sueldoActual, sueldoPromedio) {
+
+        console.log(nombre + " " + apellidos);
+        console.log("Su sueldo actual es: " + sueldoActual + " y su sueldo promedio del semestre pasado es: " + sueldoPromedio);
+
+    }
+}
+
+usuario.sueldo(nombreEntrada, apellidosEntrada, "850000", "700000");
 
 
+*/
 
 /*
 ✔✔ Cree  una  función  que  reciba  como  parámetros  NOMBRE  y  APELLIDOS  de  una  persona  y 
