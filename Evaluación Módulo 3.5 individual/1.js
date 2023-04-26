@@ -8,10 +8,10 @@ function nombreUsuarioMayus(nombre, apellidos) {        // #1
     salidaP.innerText = (nombreMayus + " " + apellidosMayus);
 };
 
-function sueldo(nombre, apellidos, sueldoActual, sueldoSemestreAnterior){       // #2
+function sueldo(nombre, apellidos, sueldoActual, sueldoSemestreAnterior,cargas){       // #2
     let salidaP = document.getElementById("salida2");
 
-    salidaP.innerText = (nombre + " " + apellidos + ". Su sueldo base es: " + sueldoActual + " y su sueldo promedio del semestre anterior es: " + sueldoSemestreAnterior);
+    salidaP.innerText = (nombre + " " + apellidos + ". Su sueldo base es: " + sueldoActual + " y su sueldo promedio del semestre anterior es: " + sueldoSemestreAnterior + ". Usted tiene " + cargas + " cargas familiares");
 };
 
 
@@ -21,7 +21,8 @@ nombreUsuarioMayus(nombreEntrada, apellidosEntrada);
 
 let sueldoActual = prompt("Ingrese su sueldo base actual:");
 let sueldoPromSemeAnt = prompt("Ingrese su sueldo base  promedio  del semestre anterior:");
-sueldo(nombreEntrada, apellidosEntrada, sueldoActual, sueldoPromSemeAnt);
+let cargasFamiliares = prompt("¿Cuantas cargas familiares tiene?");
+sueldo(nombreEntrada, apellidosEntrada, sueldoActual, sueldoPromSemeAnt, parseInt(cargasFamiliares));
 
 
 
