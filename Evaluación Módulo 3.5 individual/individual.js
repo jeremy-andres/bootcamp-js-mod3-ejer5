@@ -1,22 +1,52 @@
+let nombre = prompt("ingrese nombre");
+let apellidos = prompt("ingrese apellidos");
+let sueldoActual = prompt("ingrese sueldo actual");
+let sueldoPromedio = prompt("ingrese sueldo promedio anterior");
+
 
 let usuario = {
 
-    nombreUsuarioMayus(nombre, apellidos) {                              // #1
+    nombreUsuarioMayus(nombre, apellidos) { // #1
         let nombreMayus = nombre.toUpperCase();
         let apellidoMayus = apellidos.toUpperCase();
-    
+
         return console.log(nombreMayus + " " + apellidoMayus);
     },
 
-    sueldo(nombre, apellidos, sueldoActual, sueldoPromedio) {
-    console.log(nombre + " " + apellidos);
-    console.log("Su sueldo actual es: " + sueldoActual + " y su sueldo promedio del semestre pasado es: " + sueldoPromedio);
 
+
+    sueldo(nombre, apellidos, sueldoActual, sueldoPromedio) {
+        let cargas = prompt("¿tiene cargas familiares? si / no");
+
+        if (cargas === "si") {
+            let asignacion = 0;
+            if (sueldoPromedio <= 429899) {
+                asignacion = 16828;
+            }
+            if (sueldoPromedio > 429899 && sueldoPromedio <= 627913) {
+                asignacion = 10327;
+            }
+            if (sueldoPromedio > 627913 && sueldoPromedio <= 979330) {
+                asignacion = 3264;
+            }
+            if (sueldoPromedio > 979330) {
+                asignacion = 0;
+            }
+            return (alert("Al trabajador " + nombre + " " + apellidos + " le corresponde " + asignacion + " por su renta del semestre pasado que es " + sueldoPromedio));
+
+        }
+        if (cargas === "no") {
+            return (alert("El trabajador " + nombre + " " + apellidos + " no tiene asugnacion familiar"));
+
+        } else {
+            return (alert("Carga familiar mal ingresada"));
+        }
     }
 }
 
-usuario.nombreUsuarioMayus("Pepito", "Perez Flores");
-usuario.sueldo("Pepito", "Perez Flores", "850000", "700000");
+usuario.nombreUsuarioMayus(nombre, apellidos);
+usuario.sueldo(nombre, apellidos, sueldoActual, sueldoPromedio);
+
 
 
 
