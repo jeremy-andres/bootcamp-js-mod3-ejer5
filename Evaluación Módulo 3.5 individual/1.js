@@ -1,41 +1,30 @@
 
+function nombreUsuarioMayus(nombre, apellidos) {        // #1        
+    let nombreMayus = nombre.toUpperCase();
+    let apellidosMayus = apellidos.toUpperCase();
+    
+    let salidaP = document.getElementById("salida1");
+
+    salidaP.innerText = (nombreMayus + " " + apellidosMayus);
+};
+
+function sueldo(nombre, apellidos, sueldoActual, sueldoSemestreAnterior){       // #2
+    let salidaP = document.getElementById("salida2");
+
+    salidaP.innerText = (nombre + " " + apellidos + ". Su sueldo base es: " + sueldoActual + " y su sueldo promedio del semestre anterior es: " + sueldoSemestreAnterior);
+};
+
+
 let nombreEntrada = prompt("Ingrese su nombre: ");
 let apellidosEntrada = prompt("Ingrese sus apellidos: ");
+nombreUsuarioMayus(nombreEntrada, apellidosEntrada);
 
-let usuario = {
-    nombreUsuarioMayus(nombre, apellidos) {        
-        let nombreUsuario = nombre.toUpperCase();
-        let apellidosUsuario = apellidos.toUpperCase();
-
-        let nombreMayus = nombreUsuario.toUpperCase();
-        let apellidosMayus = apellidosUsuario.toUpperCase();
-    
-        return console.log(nombreMayus + " " + apellidosMayus);
-    },
-
-    sueldo(){
-
-    }
-}
-
-usuario.nombreUsuarioMayus(nombreEntrada, apellidosEntrada);
-
-/*
-
-let usuario = {
-
-    sueldo(nombre, apellidos, sueldoActual, sueldoPromedio) {
-
-        console.log(nombre + " " + apellidos);
-        console.log("Su sueldo actual es: " + sueldoActual + " y su sueldo promedio del semestre pasado es: " + sueldoPromedio);
-
-    }
-}
-
-usuario.sueldo(nombreEntrada, apellidosEntrada, "850000", "700000");
+let sueldoActual = prompt("Ingrese su sueldo base actual:");
+let sueldoPromSemeAnt = prompt("Ingrese su sueldo base  promedio  del semestre anterior:");
+sueldo(nombreEntrada, apellidosEntrada, sueldoActual, sueldoPromSemeAnt);
 
 
-*/
+
 
 /*
 ✔✔ Cree  una  función  que  reciba  como  parámetros  NOMBRE  y  APELLIDOS  de  una  persona  y 
