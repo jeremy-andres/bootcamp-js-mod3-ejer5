@@ -16,14 +16,13 @@
 //o Sueldo Final (al que se le suma el valor de carga familiar. //
 
 const formulario = document.getElementById("formulario");
+const tieneCargasFamiliaresCheckbox = document.getElementById('tieneCargasFamiliares'); // Casilla de cargas familiares
+const cantidadCargasFamiliaresInput = document.getElementById('cantidadCargasFamiliares'); // Cantidad de cargas 
+tieneCargasFamiliaresCheckbox.addEventListener('change', toggleCantidadCargasFamiliares);
 
 // Revisa la casilla del formulario "Tiene cargas familiares" y le agrega-quita la etiqueta Disabled
 function toggleCantidadCargasFamiliares() {
-    const tieneCargasFamiliaresCheckbox = document.getElementById('tieneCargasFamiliares'); // Casilla de cargas familiares
-    const cantidadCargasFamiliaresInput = document.getElementById('cantidadCargasFamiliares'); // Cantidad de cargas 
-    tieneCargasFamiliaresCheckbox.addEventListener('change', toggleCantidadCargasFamiliares);
-
-    if (tieneCargasFamiliaresCheckbox.checked) {
+      if (tieneCargasFamiliaresCheckbox.checked) {
       cantidadCargasFamiliaresInput.removeAttribute('disabled'); // Si la casilla está seleccionada, permite escribir la cantidad de cargas
     } else {
       cantidadCargasFamiliaresInput.setAttribute('disabled', 'disabled'); // Si la casilla NO está seleccionada, no se puede escribir en este input
@@ -71,7 +70,7 @@ formulario.addEventListener("submit", function(event) {
   const resultadoElemento = document.getElementById("resultado");
 
   // Mostrar el resultado
-   resultadoElemento.innerHTML = "Nombre completo: " + resultado.nombre + " " + resultado.apellidos + "<br>Sueldo actual: " + resultado.sueldoActual + "<br>Monto de carga familiar: " + (tieneCargasFamiliares ? obtenerMontoCargaFamiliar(resultado.sueldoActual > resultado.sueldoSemestreAnterior ? resultado.sueldoActual : resultado.sueldoSemestreAnterior) : 0) + "<br>Sueldo final: " + resultado.sueldoFinal;
+   resultadoElemento.innerHTML = "Nombre completo: " + resultado.nombre + " " + resultado.apellidos + "<br>Sueldo actual: $" + resultado.sueldoActual + "<br>Monto de carga familiar: $" + (tieneCargasFamiliares ? obtenerMontoCargaFamiliar(resultado.sueldoActual > resultado.sueldoSemestreAnterior ? resultado.sueldoActual : resultado.sueldoSemestreAnterior) : 0) + "<br>Sueldo final: $" + resultado.sueldoFinal;
 });
 
 
