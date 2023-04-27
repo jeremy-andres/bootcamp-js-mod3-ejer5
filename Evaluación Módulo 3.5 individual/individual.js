@@ -1,16 +1,15 @@
-let nombre = prompt("ingrese nombre");
-let apellidos = prompt("ingrese apellidos");
-let sueldoActual = prompt("ingrese sueldo actual");
-let sueldoPromedio = prompt("ingrese sueldo promedio anterior");
+const nombre = prompt("ingrese nombre");
+const apellidos = prompt("ingrese apellidos");
+//let sueldoActual = prompt("ingrese sueldo actual");
+//let sueldoPromedio = prompt("ingrese sueldo promedio anterior");
 
 
-let usuario = {
+const usuario = {
 
     nombreUsuarioMayus(nombre, apellidos) { // #1
         let nombreMayus = nombre.toUpperCase();
         let apellidoMayus = apellidos.toUpperCase();
-
-        return console.log(nombreMayus + " " + apellidoMayus);
+        return (alert(nombreMayus + " " + apellidoMayus));
     },
 
 
@@ -41,11 +40,51 @@ let usuario = {
         } else {
             return (alert("Carga familiar mal ingresada"));
         }
-    }
+    },
+
+    familiar(nombre, apellidos, sueldoActual, sueldoPromedio) {
+        let cargas = prompt("¿tiene cargas familiares? si / no");
+
+        if (cargas === "si") {
+            let cantidad = prompt("ingrese numero de cargas")
+            parseInt(cantidad);
+
+            let asignacion = 0;
+            if (sueldoPromedio <= 429899) {
+                asignacion = 16828 * cantidad;
+            }
+            if (sueldoPromedio > 429899 && sueldoPromedio <= 627913) {
+                asignacion = 10327 * cantidad;
+            }
+            if (sueldoPromedio > 627913 && sueldoPromedio <= 979330) {
+                asignacion = 3264 * cantidad;
+            }
+            if (sueldoPromedio > 979330) {
+                asignacion = 0;
+            }
+            return (alert("Al trabajador " + nombre + " " + apellidos + " le corresponde " + asignacion + " por tener " + cantidad + " cargas"));
+
+        }
+        if (cargas === "no") {
+            return (alert("El trabajador " + nombre + " " + apellidos + " no tiene asugnacion familiar"));
+
+        } else {
+            return (alert("Carga familiar mal ingresada"));
+        }
+    },
+
+}
+
+function datosObtenidos() {
+    let nom = usuario.nombreUsuarioMayus.;
+    console.log(nom);
 }
 
 usuario.nombreUsuarioMayus(nombre, apellidos);
-usuario.sueldo(nombre, apellidos, sueldoActual, sueldoPromedio);
+//usuario.sueldo(nombre, apellidos, sueldoActual, sueldoPromedio);
+//usuario.familiar(nombre, apellidos, sueldoActual, sueldoPromedio);
+datosObtenidos();
+
 
 
 
