@@ -1,29 +1,129 @@
 
-function nombreUsuarioMayus(nombre, apellidos) {        // #1        
-    let nombreMayus = nombre.toUpperCase();
-    let apellidosMayus = apellidos.toUpperCase();
+let formulario = document.getElementById("formulario");
+let tieneCargasFamiliaresCheckbox = document.getElementById('tieneCargasFamiliares'); 
+let cantidadCargasFamiliaresInput = document.getElementById('cantidadCargasFamiliares');  
+tieneCargasFamiliaresCheckbox.addEventListener('change', toggleCantidadCargasFamiliares);
+
+
+function escribir() {        // #1        
+
+    let valorNombre = document.getElementById('nombre').value;
+    let valorApellidos = document.getElementById('apellidos').value; //Obtiene el nombre y apellidos del formulario
     
-    let salidaP = document.getElementById("salida1");
-
-    salidaP.innerText = (nombreMayus + " " + apellidosMayus);
+    document.getElementById('nombreMayus').innerHTML=' ' + valorNombre.toUpperCase();   //Pasa los valores a mayusculas y los muestra en pantalla
+    document.getElementById('apellidosMayus').innerHTML=' ' + valorApellidos.toUpperCase();
 };
 
-function sueldo(nombre, apellidos, sueldoActual, sueldoSemestreAnterior,cargas){       // #2
-    let salidaP = document.getElementById("salida2");
+// Revisa la casilla del formulario "Tiene cargas familiares" y le agrega-quita la etiqueta Disabled
+function toggleCantidadCargasFamiliares() {
+    if (tieneCargasFamiliaresCheckbox.checked) {
+    cantidadCargasFamiliaresInput.removeAttribute('disabled'); // Si la casilla está seleccionada, permite escribir la cantidad de cargas
+    } else {
+    cantidadCargasFamiliaresInput.setAttribute('disabled', 'disabled'); // Si la casilla NO está seleccionada, no se puede escribir en este input
+    }
+}
 
-    salidaP.innerText = (nombre + " " + apellidos + ". Su sueldo base es: " + sueldoActual + " y su sueldo promedio del semestre anterior es: " + sueldoSemestreAnterior + ". Usted tiene " + cargas + " cargas familiares");
-};
 
 
-let nombreEntrada = prompt("Ingrese su nombre: ");
-let apellidosEntrada = prompt("Ingrese sus apellidos: ");
-nombreUsuarioMayus(nombreEntrada, apellidosEntrada);
+// Calcula el monto de la carga familiar según el sueldo del trabajador
+function obtenerMontoCargaFamiliar(sueldo, tramo) {
+    let monto = 0;
+    switch (tramo) {
+    case "A":
+        if (sueldo <= 429899) {
+            monto = 16828;
+        }
+        break;
+    case "B":
+        if (sueldo > 429899 && sueldo <= 627913) {
+            monto = 10327;
+        }
+        break;
+    case "C":
+        if (sueldo > 627913 && sueldo <= 979330) {
+            monto = 3264;
+        }
+        break;
+    case "D":
+        if (sueldo > 979330) {
+            monto = sueldo - 979330;
+        }
+        break;
+    default:
+        monto = 0;
+    }
+    return monto;
+}
 
-let sueldoActual = prompt("Ingrese su sueldo base actual:");
-let sueldoPromSemeAnt = prompt("Ingrese su sueldo base  promedio  del semestre anterior:");
-let cargasFamiliares = prompt("¿Cuantas cargas familiares tiene?");
-sueldo(nombreEntrada, apellidosEntrada, sueldoActual, sueldoPromSemeAnt, parseInt(cargasFamiliares));
+// Calcula sueldo final segun bono a recibir
+function calcularSueldo(nombre, apellidos, sueldoActual, sueldoSemestreAnterior, tieneCargasFamiliares, cantidadCargasFamiliares) {
+    const sueldoPromedio = (sueldoActual + sueldoSemestreAnterior) / 2;
 
+    let tramo = "";
+    if (sueldoPromedio <= 429899) {
+        tramo = "A";
+    } else if (sueldoPromedio <= 627913) {
+        tramo = "B";
+    } else if (sueldoPromedio <= 979330) {
+        tramo = "C";
+    } else {
+        tramo = "D";
+    }
+    const montoTramo = obtenerMontoCargaFamiliar(sueldoPromedio, tramo);
+
+    const sueldoFinal = sueldoPromedio + montoTramo;
+    let montoCargaFamiliar = 0;
+
+    if (tieneCargasFamiliares) {
+      montoCargaFamiliar = obtenerMontoCargaFamiliar(sueldoFinal, tramo) * cantidadCargasFamiliares;
+    }
+
+    const sueldoFinalConCarga = sueldoFinal + montoCargaFamiliar;
+
+    return {
+        nombre,
+        apellidos,
+        sueldoActual,
+        sueldoSemestreAnterior,
+        tieneCargasFamiliares,
+        cantidadCargasFamiliares,
+        sueldoFinal: sueldoFinalConCarga,
+        tramo,
+        montoTramo,
+        montoCargaFamiliar
+    };
+}
+
+    formulario.addEventListener("submit", function(event) {
+    event.preventDefault(); // Evitar el comportamiento por defecto del formulario
+
+    // Obtener los valores ingresados por el usuario
+    const nombre = formulario.nombre.value;
+    const apellidos = formulario.apellidos.value;
+    const sueldoActual = Number(formulario.sueldoActual.value);
+    const sueldoSemestreAnterior = Number(formulario.sueldoSemestreAnterior.value);
+    const tieneCargasFamiliares = formulario.tieneCargasFamiliares.checked;
+    const cantidadCargasFamiliares = Number(formulario.cantidadCargasFamiliares.value);
+
+    // Valida si los datos ingresados son números
+    if (isNaN(sueldoActual) || isNaN(sueldoSemestreAnterior) || isNaN(cantidadCargasFamiliares)) {
+        alert("Los campos de sueldo actual, sueldo semestre anterior y cantidad de cargas familiares deben ser números.");
+        return;
+    }
+
+  // Calcular el sueldo final
+const resultado = calcularSueldo(nombre, apellidos, sueldoActual, sueldoSemestreAnterior, tieneCargasFamiliares, cantidadCargasFamiliares);
+  // Obtener el elemento donde se mostrará el resultado
+const resultadoElemento = document.getElementById("resultado");
+
+  // Mostrar el resultado
+
+resultadoElemento.innerHTML = "Nombre completo: " + resultado.nombre + " " + resultado.apellidos + "<br>Sueldo actual: $" + resultado.sueldoActual + "<br>Monto de carga familiar: $" + (tieneCargasFamiliares ? obtenerMontoCargaFamiliar(resultado.sueldoActual > resultado.sueldoSemestreAnterior ? resultado.sueldoActual : resultado.sueldoSemestreAnterior) : 0) + "<br>Sueldo final: $" + resultado.sueldoFinal;
+
+const tramo = resultado.tramo;
+const montoTramo = resultado.montoTramo;
+resultadoElemento.innerHTML += "<br>Tramo: " + tramo + "<br>Monto de tramo: $" + montoTramo;
+});
 
 
 
