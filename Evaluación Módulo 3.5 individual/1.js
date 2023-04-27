@@ -26,32 +26,22 @@ function toggleCantidadCargasFamiliares() {
 
 
 // Calcula el monto de la carga familiar según el sueldo del trabajador
-function obtenerMontoCargaFamiliar(sueldo, tramo) {
+function obtenerMontoCargaFamiliar(tramo) {
     let monto = 0;
-    switch (tramo) {
-    case "A":
-        if (sueldo <= 429899) {
-            monto = 16828;
-        }
-        break;
-    case "B":
-        if (sueldo > 429899 && sueldo <= 627913) {
-            monto = 10327;
-        }
-        break;
-    case "C":
-        if (sueldo > 627913 && sueldo <= 979330) {
-            monto = 3264;
-        }
-        break;
-    case "D":
-        if (sueldo > 979330) {
-            monto = sueldo - 979330;
-        }
-        break;
-    default:
-        monto = 0;
+    if (tramo == "A"){
+        monto = 16828
     }
+    else if (tramo == "B"){
+        monto = 10327
+    }
+    else if (tramo == "C"){
+        monto = 3264
+    }
+    else {
+        monto = 0
+    }
+
+    console.log(monto);
     return monto;
 }
 
@@ -68,17 +58,21 @@ function calcularSueldo(nombre, apellidos, sueldoActual, sueldoSemestreAnterior,
         tramo = "C";
     } else {
         tramo = "D";
-    }
-    const montoTramo = obtenerMontoCargaFamiliar(sueldoPromedio, tramo);
+}
 
-    const sueldoFinal = sueldoPromedio + montoTramo;
-    let montoCargaFamiliar = 0;
+    console.log(tramo);
+    const montoTramo = obtenerMontoCargaFamiliar(tramo);
 
-    if (tieneCargasFamiliares) {
-      montoCargaFamiliar = obtenerMontoCargaFamiliar(sueldoFinal, tramo) * cantidadCargasFamiliares;
-    }
+    let cantidadCargasFamiliaresInt = parseInt(cantidadCargasFamiliares);
 
-    const sueldoFinalConCarga = sueldoFinal + montoCargaFamiliar;
+    const sueldoFinal = sueldoPromedio + (montoTramo * cantidadCargasFamiliaresInt);
+    console.log(sueldoFinal);
+
+    let montoCargaFamiliar = (montoTramo * cantidadCargasFamiliaresInt);
+    console.log(montoCargaFamiliar);
+    
+
+    const sueldoFinalConCarga = sueldoFinal;
 
     return {
         nombre,
@@ -118,7 +112,7 @@ const resultadoElemento = document.getElementById("resultado");
 
   // Mostrar el resultado
 
-resultadoElemento.innerHTML = "Nombre completo: " + resultado.nombre + " " + resultado.apellidos + "<br>Sueldo actual: $" + resultado.sueldoActual + "<br>Monto de carga familiar: $" + (tieneCargasFamiliares ? obtenerMontoCargaFamiliar(resultado.sueldoActual > resultado.sueldoSemestreAnterior ? resultado.sueldoActual : resultado.sueldoSemestreAnterior) : 0) + "<br>Sueldo final: $" + resultado.sueldoFinal;
+resultadoElemento.innerHTML = "Nombre completo: " + resultado.nombre + " " + resultado.apellidos + "<br>Sueldo actual: $" + resultado.sueldoActual + "<br>Monto de carga familiar: $" + resultado.montoCargaFamiliar + "<br>Sueldo final: $" + resultado.sueldoFinal;
 
 const tramo = resultado.tramo;
 const montoTramo = resultado.montoTramo;
