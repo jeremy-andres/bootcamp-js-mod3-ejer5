@@ -106,7 +106,7 @@ function calcularSueldo(nombre, apellidos, sueldoActual, sueldoSemestreAnterior,
   const resultadoElemento = document.getElementById("resultado");
 
   // Mostrar el resultado
-  resultadoElemento.innerHTML = "Nombre completo: " + resultado.nombre + " " + resultado.apellidos + "<br>Sueldo actual: $" + resultado.sueldoActual + "<br>Monto de carga familiar: $" + (tieneCargasFamiliares ? obtenerMontoCargaFamiliar(resultado.sueldoActual > resultado.sueldoSemestreAnterior ? resultado.sueldoActual : resultado.sueldoSemestreAnterior) : 0) + "<br>Sueldo final: $" + resultado.sueldoFinal;
+resultadoElemento.innerHTML = "Nombre completo: " + resultado.nombre + " " + resultado.apellidos + "<br>Sueldo actual: $" + resultado.sueldoActual + "<br>Monto de carga familiar: $" + (tieneCargasFamiliares ? obtenerMontoCargaFamiliar(resultado.sueldoFinalConCarga > resultado.sueldoSemestreAnterior ? resultado.sueldoFinalConCarga : resultado.sueldoSemestreAnterior) : 0) + "<br>Sueldo final: $" + resultado.sueldoFinalConCarga;
 
   const tramo = resultado.tramo;
   const montoTramo = resultado.montoTramo;
